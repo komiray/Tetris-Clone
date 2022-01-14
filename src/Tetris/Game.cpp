@@ -9,6 +9,7 @@
 /*****************************************************************************************/
 
 #include "Game.h"
+#include <iostream>
 
 /*
 ==================
@@ -28,6 +29,7 @@ Game::Game() {
 
 	m_score = 0;
 	m_nextShape = I;
+	// Random color value
 	m_nextColor = rand() % (YELLOW + 1) + BLUE;
 
 	SpawnNextTetromino();
@@ -83,7 +85,7 @@ Maps the current state of the Tetromino to the board
 Attempts to clear rows and adds score based on rows cleared
 ==================
 */
-void Game::Update()
+void Game::UpdateBoard()
 {
 	m_board->ClearTetromino();
 	m_board->MapTetromino(m_tetController->GetTetromino());
@@ -147,7 +149,12 @@ Returns:
 ==================
 */
 bool Game::PlayerPlace() {
-	return m_board->PlaceTetromino(m_tetController->GetTetromino());
+	bool success = m_board->PlaceTetromino(m_tetController->GetTetromino());
+	if (success) {
+		std::cout << m_board->GetTile(19, BOARD_WIDTH / 2) << std::endl;
+		return true;
+	}
+	return false;
 }
 
 /*
@@ -200,4 +207,7 @@ void Game::Reset()
 	m_board->Reset();
 	m_score = 0;
 	m_nextShape = I + 1;
+	m_nextColor = rand() % (YELLOW + 1) + BLUE;
+	m_storedShape = -1;
+	m_storedColor = -1;
 }
