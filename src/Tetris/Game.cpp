@@ -9,7 +9,6 @@
 /*****************************************************************************************/
 
 #include "Game.h"
-#include <iostream>
 
 /*
 ==================
@@ -151,7 +150,6 @@ Returns:
 bool Game::PlayerPlace() {
 	bool success = m_board->PlaceTetromino(m_tetController->GetTetromino());
 	if (success) {
-		std::cout << m_board->GetTile(19, BOARD_WIDTH / 2) << std::endl;
 		return true;
 	}
 	return false;
