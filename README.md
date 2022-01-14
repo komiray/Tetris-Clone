@@ -13,9 +13,13 @@ Simply download, unzip, and launch the exe to play.
 The source code can be found in `/src/Tetris`.
 
 **Controls:**
+
 ***Arrow keys*** - Move
+
 ***R*** - Rotate piece
+
 ***H*** - Store piece
+
 ***ESC*** - Exit
 
 Points are given for clearing lines.
