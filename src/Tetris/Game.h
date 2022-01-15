@@ -34,13 +34,13 @@ class Game
 		int GetStoredShape();
 		int GetStoredColor();
 		int GetTetrominoColor();
-		void Update();
 		bool PlayerMove(int direction);
 		void PlayerRotate();
 		bool PlayerPlace();
 		void SpawnNextTetromino();
 		void StoreTetromino();
 		bool HasStoredTetromino();
+		void ClearRows();
 		void ReleaseStoredTetromino();
 		void Reset();
 

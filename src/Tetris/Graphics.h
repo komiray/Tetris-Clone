@@ -36,6 +36,7 @@ class Graphics
 {
 	public:
 		Graphics(int screen_width, int screen_height);
+		~Graphics();
 		void DrawRectangle(int xPos, int yPos, int width, int height, Color color);
 		void DrawSprite(int xPos, int yPos, int width, int height, int sprite);
 		void DrawNumSprite(int xPos, int yPos, int size, int num);

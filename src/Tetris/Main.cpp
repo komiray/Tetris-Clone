@@ -9,7 +9,7 @@
 #include <windows.h>
 #include "GameController.h"
 
-int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmdshow) {
+int main() {
 	GameController gameController;
 	gameController.StartGame();
 

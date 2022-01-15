@@ -46,7 +46,8 @@ Parameters:
 ==================
 */
 void TetrominoController::SpawnTetromino(int shape, int color) {
-	ResetTetromino();
+	m_tetromino->SetPivotXTile(TET_START_X);
+	m_tetromino->SetPivotYTile(TET_START_Y);
 	m_tetromino->SetShape(shape);
 	m_tetromino->SetColor(color);
 }
@@ -229,6 +230,7 @@ bool TetrominoController::IsValidMovement(int direction) {
 			}
 			return true;
 			break;
+
 		default:
 			return false;
 	}
@@ -256,7 +258,7 @@ bool TetrominoController::IsValidTetrominoPosition() {
 			if (m_tetromino->GetTemplate(j, i) == TET ||
 				m_tetromino->GetTemplate(j, i) == TET_PIVOT) {
 				// If tile is outside the bounds of the board
-				if (yTile >= BOARD_HEIGHT ||
+				if (yTile >= BOARD_HEIGHT || yTile < 0 ||
 					xTile >= BOARD_WIDTH || xTile < 0) {
 					return false;
 				}

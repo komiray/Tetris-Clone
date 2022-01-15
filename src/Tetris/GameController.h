@@ -21,7 +21,7 @@ class GameController
 
 	private:
 		void GameOver();
-		void UpdateAll();
+		void UpdateView();
 		void QuitGame();
 		Game* m_game;
 		View* m_view;

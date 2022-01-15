@@ -29,7 +29,7 @@ Game::Game() {
 	m_score = 0;
 	m_nextShape = I;
 	// Random color value
-	m_nextColor = rand() % (YELLOW + 1) + BLUE;
+	m_nextColor = rand() % (YELLOW - BLUE + 1) + BLUE;
 
 	SpawnNextTetromino();
 }
@@ -80,14 +80,11 @@ bool Game::HasStoredTetromino() {
 
 /*
 ==================
-Maps the current state of the Tetromino to the board
 Attempts to clear rows and adds score based on rows cleared
 ==================
 */
-void Game::UpdateBoard()
+void Game::ClearRows()
 {
-	m_board->ClearTetromino();
-	m_board->MapTetromino(m_tetController->GetTetromino());
 	int rowsCleared;
 	rowsCleared = m_board->ClearFilledRows();
 
@@ -124,6 +121,8 @@ bool Game::PlayerMove(int direction)
 {
 	if (m_tetController->IsValidMovement(direction)) {
 		m_tetController->MoveTetromino(direction);
+		m_board->ClearTetromino();
+		m_board->MapTetromino(m_tetController->GetTetromino());
 		return true;
 	}
 	return false;
@@ -137,6 +136,8 @@ Attempts to rotate the player Tetromino, does nothing on failure
 void Game::PlayerRotate()
 {
 	m_tetController->RotateTetromino();
+	m_board->ClearTetromino();
+	m_board->MapTetromino(m_tetController->GetTetromino());
 }
 
 /*
@@ -150,9 +151,9 @@ Returns:
 bool Game::PlayerPlace() {
 	bool success = m_board->PlaceTetromino(m_tetController->GetTetromino());
 	if (success) {
-		return true;
+		ClearRows();
 	}
-	return false;
+	return success;
 }
 
 /*
@@ -169,7 +170,10 @@ void Game::SpawnNextTetromino() {
 	else {
 		m_nextShape++;
 	}
-	m_nextColor = rand() % (YELLOW + 1) + BLUE;
+	m_nextColor = rand() % (YELLOW - BLUE + 1) + BLUE;
+
+	m_board->ClearTetromino();
+	m_board->MapTetromino(m_tetController->GetTetromino());
 }
 
 /*
@@ -205,7 +209,10 @@ void Game::Reset()
 	m_board->Reset();
 	m_score = 0;
 	m_nextShape = I + 1;
-	m_nextColor = rand() % (YELLOW + 1) + BLUE;
+	m_nextColor = rand() % (YELLOW - BLUE + 1) + BLUE;
 	m_storedShape = -1;
 	m_storedColor = -1;
+
+	m_board->ClearTetromino();
+	m_board->MapTetromino(m_tetController->GetTetromino());
 }

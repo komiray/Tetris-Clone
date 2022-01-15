@@ -67,7 +67,10 @@ void GameController::StartGame() {
                             if (!m_game->PlayerPlace()) {
                                 GameOver();
                             }
-                        };
+                            m_game->SpawnNextTetromino();
+                            m_canReleaseStoredTet = true;
+                            m_canStoreTet = true;
+                        }
                         break;
                     case SDLK_r:
                         m_game->PlayerRotate();
@@ -81,6 +84,7 @@ void GameController::StartGame() {
                         }
                         else if (m_canStoreTet) {
                             m_game->StoreTetromino();
+                            m_game->SpawnNextTetromino();
                             m_canReleaseStoredTet = false;
                         }
                         break;
@@ -111,13 +115,27 @@ void GameController::StartGame() {
                 m_canStoreTet = true;
             }
         }
-        
-        UpdateAll();
+
+        UpdateView();
 
         SDL_Delay(1000 / FPS);
     }
 
     QuitGame();
+}
+
+/*
+==================
+Update the view
+==================
+*/
+void GameController::UpdateView() {
+    m_view->Clear();
+    m_view->SetNextTetromino(m_game->GetNextShape(), m_game->GetNextColor());
+    m_view->SetStoredTetromino(m_game->GetStoredShape(), m_game->GetStoredColor());
+    m_view->DrawGUI(m_game->GetScore());
+    m_view->DrawBoard(m_game->GetBoard(), m_game->GetTetrominoColor());
+    m_view->Update();
 }
 
 /*
@@ -139,23 +157,6 @@ void GameController::GameOver() {
     m_view->DrawStartText();
     m_view->Update();
     SDL_Delay(1000);
-}
-
-/*
-==================
-Update the game state (map the Tetromino to the board and check for lines 
-to clear), draw all updates and update the view
-==================
-*/
-void GameController::UpdateAll() {
-    m_game->Update();
-
-    m_view->Clear();
-    m_view->SetNextTetromino(m_game->GetNextShape(), m_game->GetNextColor());
-    m_view->SetStoredTetromino(m_game->GetStoredShape(), m_game->GetStoredColor());
-    m_view->DrawGUI(m_game->GetScore());
-    m_view->DrawBoard(m_game->GetBoard(), m_game->GetTetrominoColor());
-    m_view->Update();
 }
 
 /*

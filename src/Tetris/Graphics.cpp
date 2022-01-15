@@ -33,6 +33,13 @@ Graphics::Graphics(int screen_width, int screen_height) {
 	LoadSprites();
 }
 
+Graphics::~Graphics() {
+	SDL_DestroyWindow(m_window);
+	SDL_DestroyRenderer(m_renderer);
+	SDL_FreeSurface(m_windowSurface);
+	SDL_QuitSubSystem(SDL_INIT_VIDEO);
+}
+
 /*
 ==================
 Draws a filled rectangle
@@ -156,39 +163,49 @@ void Graphics::LoadSprites() {
 
 	sprite = IMG_Load("sprites/block_blue.png");
 	block_blue = SDL_CreateTextureFromSurface(m_renderer, sprite);
+	SDL_FreeSurface(sprite);
 
 	sprite = IMG_Load("sprites/block_green.png");
 	block_green = SDL_CreateTextureFromSurface(m_renderer, sprite);
+	SDL_FreeSurface(sprite);
 
 	sprite = IMG_Load("sprites/block_orange.png");
 	block_orange = SDL_CreateTextureFromSurface(m_renderer, sprite);
+	SDL_FreeSurface(sprite);
 
 	sprite = IMG_Load("sprites/block_red.png");
 	block_red = SDL_CreateTextureFromSurface(m_renderer, sprite);
+	SDL_FreeSurface(sprite);
 
 	sprite = IMG_Load("sprites/block_purple.png");
 	block_purple = SDL_CreateTextureFromSurface(m_renderer, sprite);
+	SDL_FreeSurface(sprite);
 
 	sprite = IMG_Load("sprites/block_yellow.png");
 	block_yellow = SDL_CreateTextureFromSurface(m_renderer, sprite);
+	SDL_FreeSurface(sprite);
 
 	sprite = IMG_Load("sprites/game_start_txt.png");
 	game_start_txt = SDL_CreateTextureFromSurface(m_renderer, sprite);
+	SDL_FreeSurface(sprite);
 
 	sprite = IMG_Load("sprites/game_over_txt.png");
 	game_over_txt = SDL_CreateTextureFromSurface(m_renderer, sprite);
+	SDL_FreeSurface(sprite);
 
 	sprite = IMG_Load("sprites/score_txt.png");
 	score_txt = SDL_CreateTextureFromSurface(m_renderer, sprite);
+	SDL_FreeSurface(sprite);
 
 	sprite = IMG_Load("sprites/next_txt.png");
 	next_txt = SDL_CreateTextureFromSurface(m_renderer, sprite);
+	SDL_FreeSurface(sprite);
 
 	sprite = IMG_Load("sprites/stored_txt.png");
 	stored_txt = SDL_CreateTextureFromSurface(m_renderer, sprite);
+	SDL_FreeSurface(sprite);
 
 	sprite = IMG_Load("sprites/numbers.png");
 	numbers = SDL_CreateTextureFromSurface(m_renderer, sprite);
-
 	SDL_FreeSurface(sprite);
 }

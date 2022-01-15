@@ -17,10 +17,10 @@ constexpr auto BORDER_SIZE = 5;
 constexpr auto SCREEN_WIDTH = BOARD_WIDTH * TILE_SIZE + (BORDER_SIZE * 2) + 300;
 constexpr auto SCREEN_HEIGHT = BOARD_HEIGHT * TILE_SIZE + (BORDER_SIZE * 2);
 
-constexpr auto TXT_SIZE = 20;
+constexpr auto TXT_SIZE = 25;
 
 constexpr auto START_TXT_WIDTH = 10 * TXT_SIZE;
-constexpr auto GAME_OVER_TXT_WIDTH = 8 * TXT_SIZE;
+constexpr auto GAME_OVER_TXT_WIDTH = 9 * TXT_SIZE;
 constexpr auto SCORE_TXT_WIDTH = 6 * TXT_SIZE;
 constexpr auto NEXT_TXT_WIDTH = 5 * TXT_SIZE;
 constexpr auto STORED_TXT_WIDTH = 7 * TXT_SIZE;
